@@ -8,8 +8,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node test/index.ts",
+    "test:js": "node test/test.js",
+    "test:ts": "ts-node test/test.ts",
     "build": "rollup -c",
-    "lint": "eslint src/**/*.*",
     "prepare": "husky install"
   },
   "dependencies": {},
