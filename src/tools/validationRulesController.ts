@@ -1,24 +1,24 @@
-import { Value, Rule, ComplexRule, Status } from '../types'
+import { Value, Rule, ComplexRule, RulesResponse } from '../types'
 import { required, email, phone, identity } from './validationRules'
 
 // 校验规则控制器
-export const validationRulesController = (value: Value, rule: Rule | ComplexRule): Status => {
-  let status: Status
+export const validationRulesController = (value: Value, rule: Rule | ComplexRule): RulesResponse => {
+  let rulesResponse: RulesResponse
   switch (rule) {
     case 'required':
-      status = required(value)
+      rulesResponse = required(value)
       break
     case 'email':
-      status = email(value)
+      rulesResponse = email(value)
       break
     case 'phone':
-      status = phone(value)
+      rulesResponse = phone(value)
       break
     case 'identity':
-      status = identity(value)
+      rulesResponse = identity(value)
       break
     default:
-      status = required(value)
+      rulesResponse = required(value)
   }
-  return status
+  return rulesResponse
 }

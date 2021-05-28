@@ -8,7 +8,14 @@ export const setValidationResponse = (response: ValidatorResponse): ValidatorRes
 
 // 优化检验返回格式-裁剪
 export const clipValidationResponse = (response: ValidatorResponse): ValidatorResponse => {
+  if (response.status === statusBox.rulesErr) {
+    delete response.expectType
+    delete response.currentType
+    response.rule = 'unknown'
+  }
   if (response.status === statusBox.checkSuccess) {
+    delete response.expectType
+    delete response.currentType
     delete response.value
     delete response.rule
     delete response.index

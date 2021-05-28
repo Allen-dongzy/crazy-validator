@@ -1,13 +1,49 @@
-const toString = Object.prototype.toString
+import { TypeResponse } from '../types'
+const _toString = Object.prototype.toString
 
-// val是否为Object
-export const isObject = (val: any): val is Object => toString.call(val) === '[object Object]'
+// 获取类型
+const _getType = (val: any): string => _toString.call(val).split(' ')[1].split(']')[0].toLowerCase()
 
-// val是否为Array
-export const isArray = (val: any): val is Array<any> => toString.call(val) === '[object Array]'
+// val是否为object类型
+export const isObject = (val: any): TypeResponse => {
+  const expectType: string = 'object'
+  const currentType: string = _getType(val)
+  return {
+    value: currentType === expectType,
+    currentType,
+    expectType
+  }
+}
 
-// val是否为String
-export const isString = (val: any): val is String => toString.call(val) === '[object String]'
+// val是否为array类型
+export const isArray = (val: any): TypeResponse => {
+  const expectType: string = 'array'
+  const currentType: string = _getType(val)
+  return {
+    value: currentType === expectType,
+    currentType,
+    expectType
+  }
+}
 
-// val是否为Number
-export const isNumber = (val: any): val is Number => toString.call(val) === '[object Number]'
+// val是否为string类型
+export const isString = (val: any): TypeResponse => {
+  const expectType: string = 'string'
+  const currentType: string = _getType(val)
+  return {
+    value: currentType === expectType,
+    currentType,
+    expectType
+  }
+}
+
+// val是否为number类型
+export const isNumber = (val: any): TypeResponse => {
+  const expectType: string = 'number'
+  const currentType: string = _getType(val)
+  return {
+    value: currentType === expectType,
+    currentType,
+    expectType
+  }
+}

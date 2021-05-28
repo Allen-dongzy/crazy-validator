@@ -2,12 +2,12 @@ import { isObject, isArray } from './tools/validationTypes'
 import { validationRulesController } from './tools/validationRulesController'
 import { setValidationResponse, clipValidationResponse } from './tools/validationResponse'
 import { statusBox } from './tools/validationStatus'
-import { CheckElement, ValidatorResponse, Rule, ComplexRule, Value, Status } from './types'
+import { CheckElement, ValidatorResponse, Rule, ComplexRule, Value, RulesResponse } from './types'
 
 // 表单验证
 const formTest = (checkElement: CheckElement | CheckElement[]): ValidatorResponse => {
-  if (isArray(checkElement)) return clipValidationResponse(_parseArray(checkElement))
-  if (isObject(checkElement)) return clipValidationResponse(_parseObject(checkElement))
+  if (isArray(checkElement).value) return clipValidationResponse(_parseArray(checkElement as CheckElement[]))
+  if (isObject(checkElement).value) return clipValidationResponse(_parseObject(checkElement as CheckElement))
 }
 
 // 解析校验元素列表
@@ -40,12 +40,17 @@ const _parseObject = (checkElement: CheckElement): ValidatorResponse => {
 // 分派规则控制器
 const _dispatchRuleController = (value: Value, rule: Rule | ComplexRule): ValidatorResponse => {
   let msg: string = ''
-  if (isObject(rule)) {
+  if (isObject(rule).value) {
     msg = (rule as ComplexRule).msg || ''
     rule = (rule as ComplexRule).type
   }
-  const status: Status = rule ? validationRulesController(value, rule) : statusBox.rulesErr
-  const response: ValidatorResponse = { status, value, rule, msg }
+  rule = rule as Rule
+  const {
+    status,
+    expectType,
+    currentType
+  }: RulesResponse = rule ? validationRulesController(value, rule) : { status: statusBox.rulesErr }
+  const response: ValidatorResponse = { status, expectType, currentType, value, rule, msg }
   return setValidationResponse(response)
 }
 

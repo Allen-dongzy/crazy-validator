@@ -27,11 +27,27 @@ export interface CheckElement {
   rules: Array<Rule | ComplexRule>
 }
 
-// 响应接口
+// type响应接口
+export interface TypeResponse {
+  value: boolean,
+  currentType: string,
+  expectType: string
+}
+
+// rule响应接口
+export interface RulesResponse {
+  status: Status,
+  expectType?: string,
+  currentType?: string
+}
+
+// validator响应接口
 export interface ValidatorResponse {
   status: Status,
+  expectType?: Value,
+  currentType?: string,
   value?: Value,
-  rule?: Rule,
+  rule?: Rule | 'unknown',
   msg?: string,
   index?: number
 }
