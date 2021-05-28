@@ -1,8 +1,8 @@
 const formTest = require('../dist/bundle')
 
-let value1 = 'a@b.com'
-let value2 = '6540011997022129167'
-let value3 = '17623178041'
+const value1 = 'a@b.com'
+const value2 = '6540011997022129167'
+const value3 = '17623178041'
 
 const checkElements = [{
   value: value1,
