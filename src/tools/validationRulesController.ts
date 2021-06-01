@@ -1,5 +1,5 @@
 import { Value, Rule, ComplexRule, RulesResponse } from '../types'
-import { required, email, phone, identity } from './validationRules'
+import { required, email, phone, identity, banEmoji } from './validationRules'
 
 // 校验规则控制器
 export const validationRulesController = (value: Value, rule: Rule | ComplexRule): RulesResponse => {
@@ -16,6 +16,9 @@ export const validationRulesController = (value: Value, rule: Rule | ComplexRule
       break
     case 'identity':
       rulesResponse = identity(value)
+      break
+    case 'banEmoji':
+      rulesResponse = banEmoji(value)
       break
     default:
       rulesResponse = required(value)
