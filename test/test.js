@@ -1,4 +1,4 @@
-const formTest = require('../dist/bundle')
+const formTest = require('../dist')
 
 const value1 = 'a@b.com'
 const value2 = '6540011997022129167'
