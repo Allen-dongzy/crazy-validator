@@ -5,7 +5,7 @@ import { statusBox } from './tools/validationStatus'
 import { CheckElement, ValidatorResponse, Rule, ComplexRule, Value, RulesResponse } from './types'
 
 // 表单验证
-const formTest = (checkElement: CheckElement | CheckElement[]): ValidatorResponse => {
+const validator = (checkElement: CheckElement | CheckElement[]): ValidatorResponse => {
   if (isArray(checkElement).value) return clipValidationResponse(_parseArray(checkElement as CheckElement[]))
   if (isObject(checkElement).value) return clipValidationResponse(_parseObject(checkElement as CheckElement))
 }
@@ -54,4 +54,4 @@ const _dispatchRuleController = (value: Value, rule: Rule | ComplexRule): Valida
   return setValidationResponse(response)
 }
 
-export default formTest
+export default validator

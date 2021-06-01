@@ -1,4 +1,4 @@
-const formTest = require('../dist')
+const validator = require('../dist')
 
 const value1: any = 'a@b.com'
 const value2: any = '6540011997022129167'
@@ -18,4 +18,4 @@ const checkElements = [{
   rules: ['required', 'phone']
 }]
 
-console.log(formTest(checkElements))
+console.log(validator(checkElements))

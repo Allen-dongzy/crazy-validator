@@ -1,4 +1,4 @@
-import formTest, { CheckElement } from '../src'
+import validator, { CheckElement } from '../src'
 
 const value1: any = 'a@b.com'
 const value2: any = '654001199702212916'
@@ -18,4 +18,4 @@ const checkElements: CheckElement[] = [{
   rules: ['required', 'phone']
 }]
 
-console.log(formTest(checkElements))
+console.log(validator(checkElements))
