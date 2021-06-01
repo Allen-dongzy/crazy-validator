@@ -116,3 +116,22 @@ export const identity = (value: Value): RulesResponse => {
     currentType: stringRule.currentType
   })
 }
+
+// 禁止emoji校验
+export const banEmoji = (value: Value) => {
+  const stringRule = isString(value)
+  if (!stringRule.value) {
+    return _commonBack({
+      res: false,
+      expectType: stringRule.expectType,
+      currentType: stringRule.currentType,
+      status: statusBox.valueErr
+    })
+  }
+  const banEmojiRegExg: RegExp = /[^\u4E00-\u9FA5|\d|a-zA-Z|\r\n\s,.?!，。？！…—&$=()-+/*{}[\]]|\s/g
+  return _commonBack({
+    res: banEmojiRegExg.test(value as string),
+    expectType: stringRule.expectType,
+    currentType: stringRule.currentType
+  })
+}
