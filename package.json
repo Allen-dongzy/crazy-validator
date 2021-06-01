@@ -1,10 +1,10 @@
 {
-  "name": "y-validator",
+  "name": "easy-validator",
   "version": "1.0.0",
-  "description": "y-validator是一款帮助前端开发人员进行表单验证的通用型插件",
+  "description": "easy-validator是一款帮助前端开发人员进行表单验证的通用型插件",
   "main": "src/index.js",
-  "repository": "git@github.com:Allen-dongzy/y-validator.git",
-  "author": "dzy <allen.dongzy@gmail.com>",
+  "repository": "git@github.com:Allen-dongzy/easy-validator.git",
+  "author": "allen_d <allen.dongzy@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node test/index.ts",
