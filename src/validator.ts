@@ -1,13 +1,13 @@
 import { isObject, isArray } from './tools/validationTypes'
-import { validationRulesController } from './tools/validationRulesController'
+import { validationController } from './tools/validationController'
 import { setValidationResponse, clipValidationResponse } from './tools/validationResponse'
 import { statusBox } from './tools/validationStatus'
 import { CheckElement, ValidatorResponse, Rule, ComplexRule, Value, RulesResponse } from './types'
 
 // 表单验证
 const validator = (checkElement: CheckElement | CheckElement[]): ValidatorResponse => {
-  if (isArray(checkElement).value) return clipValidationResponse(_parseArray(checkElement as CheckElement[]))
-  if (isObject(checkElement).value) return clipValidationResponse(_parseObject(checkElement as CheckElement))
+  if (isArray(checkElement)) return clipValidationResponse(_parseArray(checkElement as CheckElement[]))
+  if (isObject(checkElement)) return clipValidationResponse(_parseObject(checkElement as CheckElement))
 }
 
 // 解析校验元素列表
@@ -40,7 +40,7 @@ const _parseObject = (checkElement: CheckElement): ValidatorResponse => {
 // 分派规则控制器
 const _dispatchRuleController = (value: Value, rule: Rule | ComplexRule): ValidatorResponse => {
   let msg: string = ''
-  if (isObject(rule).value) {
+  if (isObject(rule)) {
     msg = (rule as ComplexRule).msg || ''
     rule = (rule as ComplexRule).type
   }
@@ -49,7 +49,7 @@ const _dispatchRuleController = (value: Value, rule: Rule | ComplexRule): Valida
     status,
     expectType,
     currentType
-  }: RulesResponse = rule ? validationRulesController(value, rule) : { status: statusBox.rulesErr }
+  }: RulesResponse = rule ? validationController(value, rule) : { status: statusBox.rulesErr }
   const response: ValidatorResponse = { status, expectType, currentType, value, rule, msg }
   return setValidationResponse(response)
 }

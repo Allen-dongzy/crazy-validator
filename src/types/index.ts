@@ -5,7 +5,7 @@ export type Status = 1000 | 1001 | 1002 | 1003
 export type Value = Array<any> | object | string | number
 
 // 校验规则
-export type Rule = 'required' | 'email' | 'phone' | 'identity' | 'length' | 'size' | 'banEmoji'
+export type Rule = 'required' | 'email' | 'phone' | 'identity' | 'length' | 'size' | 'noEmoji'
 
 // 状态容器
 export interface StatusBox {
@@ -27,11 +27,12 @@ export interface CheckElement {
   rules: Array<Rule | ComplexRule>
 }
 
-// type响应接口
-export interface TypeResponse {
-  value: boolean,
-  currentType: string,
-  expectType: string
+// rule返回格式
+export interface RuleBack {
+  res: boolean,
+  expectType?: string,
+  currentType?: string,
+  status?: Status
 }
 
 // rule响应接口

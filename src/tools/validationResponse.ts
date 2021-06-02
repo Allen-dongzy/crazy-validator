@@ -42,7 +42,7 @@ const _setValidationResponseMsg = (response: ValidatorResponse): ValidatorRespon
       case 'identity':
         response.msg = '身份证格式错误'
         break
-      case 'banEmoji':
+      case 'noEmoji':
         response.msg = '文本不能存在emoji表情'
         break
       default:
