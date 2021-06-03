@@ -9,7 +9,7 @@ interface LimitSizeParams {
   min?: number;
 }
 
-// 数组大小校验-严谨结果
+// 数值大小校验-严谨结果
 export const size = (value: Value, max: number, min: number = 0): RulesResponse => {
   let errMsg = '请输入正确范围内的数值'
   if (!max) errMsg = '缺少最大值属性:max'
