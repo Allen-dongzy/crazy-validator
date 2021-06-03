@@ -20,7 +20,7 @@ export const phone = (value: Value): RulesResponse => {
 // 手机号校验-简单结果
 export const isPhone = (value: Value, info?: string | Function, toast?: Function): boolean => {
   if (isFunction(info)) {
-    toast = info as Function
+    toast = info as Function 
     info = errMsg
   }
   const phoneRegExg: RegExp = /^1[3456789]\d{9}$/
