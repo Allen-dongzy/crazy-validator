@@ -23,7 +23,7 @@ export const isPhone = (value: Value, info?: string | Function, toast?: Function
     toast = info as Function
     info = errMsg
   }
-  const phoneRegExg: RegExp = /^1[34578]\d{9}$/
+  const phoneRegExg: RegExp = /^1[3456789]\d{9}$/
   const res = phoneRegExg.test(value as string)
   if (!res && info && toast) toast(info as string)
   return res
