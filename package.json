@@ -1,9 +1,9 @@
 {
-  "name": "easy-validator",
+  "name": "crazy-validator",
   "version": "1.0.0",
-  "description": "easy-validator是一款帮助前端开发人员进行表单验证的通用型插件",
+  "description": "crazy-validator是一款帮助前端开发人员进行表单验证的通用型插件",
   "main": "src/index.js",
-  "repository": "git@github.com:Allen-dongzy/easy-validator.git",
+  "repository": "git@github.com:Allen-dongzy/crazy-validator.git",
   "author": "allen_d <allen.dongzy@gmail.com>",
   "license": "MIT",
   "scripts": {
