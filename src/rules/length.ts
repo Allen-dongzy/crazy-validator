@@ -1,4 +1,4 @@
-import { isString, getType } from '../tools/validationTypes'
+import { isString, isFunction, getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
 
@@ -8,6 +8,9 @@ interface LimitLength {
   max: number;
   min?: number;
 }
+
+// 默认错误提示
+const errMsg: string = '字符不在指定范围内'
 
 // 数值大小校验-严谨结果
 export const length = (value: Value, max: number, min: number = 0): RulesResponse => {
@@ -25,7 +28,11 @@ export const length = (value: Value, max: number, min: number = 0): RulesRespons
 }
 
 // 数值大小校验-简单结果
-export const limitLength = (params: LimitLength, info?: string, toast?: Function): boolean => {
+export const limitLength = (params: LimitLength, info?: string | Function, toast?: Function): boolean => {
+  if (isFunction(info)) {
+    toast = info as Function
+    info = errMsg
+  }
   const { value, min, max } = params
   let res: boolean
   if (!max) {
@@ -35,6 +42,6 @@ export const limitLength = (params: LimitLength, info?: string, toast?: Function
   } else {
     res = !((value as string).length < min || (value as string).length > max)
   }
-  if (!res && info && toast) toast(info)
+  if (!res && info && toast) toast(info as string)
   return res
 }

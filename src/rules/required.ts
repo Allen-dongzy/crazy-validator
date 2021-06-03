@@ -1,6 +1,9 @@
-import { isObject, isArray, getType } from '../tools/validationTypes'
+import { isObject, isArray, isFunction, getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
+
+// 默认错误提示
+const errMsg: string = '必填项不能为空'
 
 // 非空校验-严谨结果
 export const required = (value: Value): RulesResponse => {
@@ -8,14 +11,18 @@ export const required = (value: Value): RulesResponse => {
   const currentType: string = getType(value)
   return ruleBack({
     res: isRequired(value),
-    errMsg: '必填项不能为空',
+    errMsg,
     expectType,
     currentType
   })
 }
 
 // 非空校验-简单结果
-export const isRequired = (value: Value, info?: string, toast?: Function): boolean => {
+export const isRequired = (value: Value, info?: string | Function, toast?: Function): boolean => {
+  if (isFunction(info)) {
+    toast = info as Function
+    info = errMsg
+  }
   let res: boolean
   if (isObject(value)) {
     res = Object.keys(value as object).length > 0
@@ -24,6 +31,6 @@ export const isRequired = (value: Value, info?: string, toast?: Function): boole
   } else {
     res = !!value
   }
-  if (!res && info && toast) toast(info)
+  if (!res && info && toast) toast(info as string)
   return res
 }

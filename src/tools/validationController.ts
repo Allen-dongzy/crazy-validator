@@ -1,6 +1,6 @@
+import statusBox from './validationStatus'
 import { Value, Rule, ComplexRule, RulesResponse } from '../types'
 import { isObject } from './validationTypes'
-import { statusBox } from './validationStatus'
 import { required } from '../rules/required'
 import { email } from '../rules/email'
 import { phone } from '../rules/phone'

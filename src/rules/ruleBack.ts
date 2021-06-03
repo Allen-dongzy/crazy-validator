@@ -1,5 +1,5 @@
 import { RuleBack, RulesResponse } from '../types'
-import { statusBox } from '../tools/validationStatus'
+import statusBox from '../tools/validationStatus'
 
 // rule返回
 const ruleBack = ({

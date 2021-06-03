@@ -1,4 +1,4 @@
-import { isNumber, getType } from '../tools/validationTypes'
+import { isNumber, isFunction, getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
 
@@ -8,6 +8,9 @@ interface LimitSizeParams {
   max: number;
   min?: number;
 }
+
+// 默认错误提示
+const errMsg: string = '数值大小不在指定范围内'
 
 // 数值大小校验-严谨结果
 export const size = (value: Value, max: number, min: number = 0): RulesResponse => {
@@ -25,7 +28,11 @@ export const size = (value: Value, max: number, min: number = 0): RulesResponse 
 }
 
 // 数值大小校验-简单结果
-export const limitSize = (params: LimitSizeParams, info?: string, toast?: Function): boolean => {
+export const limitSize = (params: LimitSizeParams, info?: string | Function, toast?: Function): boolean => {
+  if (isFunction(info)) {
+    toast = info as Function
+    info = errMsg
+  }
   const { value, min, max } = params
   let res: boolean
   if (!max) {
@@ -35,6 +42,6 @@ export const limitSize = (params: LimitSizeParams, info?: string, toast?: Functi
   } else {
     res = !(value < min || value > max)
   }
-  if (!res && info && toast) toast(info)
+  if (!res && info && toast) toast(info as string)
   return res
 }

@@ -1,13 +1,17 @@
+import statusBox from './tools/validationStatus'
+import validationToast from './tools/validationToast'
 import { isObject, isArray } from './tools/validationTypes'
 import { validationController } from './tools/validationController'
 import { setValidationResponse, clipValidationResponse } from './tools/validationResponse'
-import { statusBox } from './tools/validationStatus'
 import { CheckElement, ValidatorResponse, Rule, ComplexRule, Value, RulesResponse } from './types'
 
 // 表单验证
-const validator = (checkElement: CheckElement | CheckElement[]): ValidatorResponse => {
-  if (isArray(checkElement)) return clipValidationResponse(_parseArray(checkElement as CheckElement[]))
-  if (isObject(checkElement)) return clipValidationResponse(_parseObject(checkElement as CheckElement))
+const validator = (checkElement: CheckElement | CheckElement[], toast?: Function): ValidatorResponse => {
+  let response: ValidatorResponse
+  if (isArray(checkElement)) response = clipValidationResponse(_parseArray(checkElement as CheckElement[]))
+  if (isObject(checkElement)) response = clipValidationResponse(_parseObject(checkElement as CheckElement))
+  validationToast(response, toast)
+  return response
 }
 
 // 解析校验元素列表

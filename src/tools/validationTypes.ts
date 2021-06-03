@@ -32,3 +32,10 @@ export const isNumber = (val: any): boolean => {
   const currentType: string = getType(val)
   return currentType === expectType
 }
+
+// val是否为function类型
+export const isFunction = (val: any): boolean => {
+  const expectType: string = 'function'
+  const currentType: string = getType(val)
+  return currentType === expectType
+}

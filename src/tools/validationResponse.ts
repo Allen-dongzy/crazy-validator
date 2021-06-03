@@ -1,5 +1,5 @@
 import { ValidatorResponse } from '../types'
-import { statusBox } from './validationStatus'
+import statusBox from './validationStatus'
 
 // 设置检验体
 export const setValidationResponse = (response: ValidatorResponse): ValidatorResponse => {
