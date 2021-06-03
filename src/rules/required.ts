@@ -8,13 +8,14 @@ export const required = (value: Value): RulesResponse => {
   const currentType: string = getType(value)
   return ruleBack({
     res: isRequired(value),
+    errMsg: '必填项不能为空',
     expectType,
     currentType
   })
 }
 
 // 非空校验-简单结果
-export const isRequired = (value: Value): boolean => {
+export const isRequired = (value: Value, info?: string, toast?: Function): boolean => {
   let res: boolean
   if (isObject(value)) {
     res = Object.keys(value as object).length > 0
@@ -23,5 +24,6 @@ export const isRequired = (value: Value): boolean => {
   } else {
     res = !!value
   }
+  if (!res && info && toast) toast(info)
   return res
 }

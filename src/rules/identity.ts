@@ -1,4 +1,4 @@
-import { isString, getType } from '../tools/validationTypes'
+import { getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
 
@@ -8,14 +8,16 @@ export const identity = (value: Value): RulesResponse => {
   const currentType: string = getType(value)
   return ruleBack({
     res: isIdentity(value),
+    errMsg: '身份证格式错误',
     expectType,
     currentType
   })
 }
 
 // 身份证校验-简单结果
-export const isIdentity = (value: Value): boolean => {
-  if (!isString(value)) return false
+export const isIdentity = (value: Value, info?: string, toast?: Function): boolean => {
   const identityRegExg: RegExp = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-  return identityRegExg.test(value as string)
+  const res = identityRegExg.test(value as string)
+  if (!res && info && toast) toast(info)
+  return res
 }

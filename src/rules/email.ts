@@ -1,4 +1,4 @@
-import { isString, getType } from '../tools/validationTypes'
+import { getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
 
@@ -8,14 +8,16 @@ export const email = (value: Value): RulesResponse => {
   const currentType: string = getType(value)
   return ruleBack({
     res: isEmail(value),
+    errMsg: '邮箱格式错误',
     expectType,
     currentType
   })
 }
 
 // 邮箱校验-简单结果
-export const isEmail = (value: Value): boolean => {
-  if (!isString(value)) return false
+export const isEmail = (value: Value, info?: string, toast?: Function): boolean => {
   const emailRegExg: RegExp = /^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-  return emailRegExg.test(value as string)
+  const res = emailRegExg.test(value as string)
+  if (!res && info && toast) toast(info)
+  return res
 }

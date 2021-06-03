@@ -1,4 +1,4 @@
-import { isString, getType } from '../tools/validationTypes'
+import { getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
 
@@ -8,14 +8,16 @@ export const noEmoji = (value: Value): RulesResponse => {
   const currentType: string = getType(value)
   return ruleBack({
     res: isNoEmoji(value),
+    errMsg: '文本不能存在emoji表情',
     expectType,
     currentType
   })
 }
 
 // 禁用emoji校验-简单结果
-export const isNoEmoji = (value: Value): boolean => {
-  if (!isString(value)) return false
+export const isNoEmoji = (value: Value, info?: string, toast?: Function): boolean => {
   const noEmojiRegExg: RegExp = /[^\u4E00-\u9FA5|\d|a-zA-Z|\r\n\s,.?!，。？！…—&$=()-+/*{}[\]]|\s/g
-  return noEmojiRegExg.test(value as string)
+  const res = noEmojiRegExg.test(value as string)
+  if (!res && info && toast) toast(info)
+  return res
 }

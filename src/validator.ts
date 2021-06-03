@@ -15,7 +15,8 @@ const _parseArray = (checkElements: CheckElement[]): ValidatorResponse => {
   let response: ValidatorResponse
   checkElements.some((checkElement, index) => {
     response = _parseObject(checkElement)
-    response.index = index
+    if (!response.position && response.position !== 0) response.position = index as number
+    else response.position = [index, response.position] as Array<number>
     return response.status !== statusBox.checkSuccess
   })
   return response
@@ -25,8 +26,9 @@ const _parseArray = (checkElements: CheckElement[]): ValidatorResponse => {
 const _parseObject = (checkElement: CheckElement): ValidatorResponse => {
   let response: ValidatorResponse
   if (checkElement.rules.length > 1) {
-    checkElement.rules.some((rule: Rule | ComplexRule) => {
+    checkElement.rules.some((rule: Rule | ComplexRule, index) => {
       response = _dispatchRuleController(checkElement.value, rule)
+      response.position = index
       return response.status !== statusBox.checkSuccess
     })
   } else if (checkElement.rules.length === 1) {
@@ -39,17 +41,13 @@ const _parseObject = (checkElement: CheckElement): ValidatorResponse => {
 
 // 分派规则控制器
 const _dispatchRuleController = (value: Value, rule: Rule | ComplexRule): ValidatorResponse => {
-  let msg: string = ''
-  if (isObject(rule)) {
-    msg = (rule as ComplexRule).msg || ''
-    rule = (rule as ComplexRule).type
-  }
-  rule = rule as Rule
   const {
     status,
     expectType,
-    currentType
+    currentType,
+    errMsg: msg
   }: RulesResponse = rule ? validationController(value, rule) : { status: statusBox.rulesErr }
+  rule = isObject(rule) ? (rule as ComplexRule).type : (rule as Rule)
   const response: ValidatorResponse = { status, expectType, currentType, value, rule, msg }
   return setValidationResponse(response)
 }

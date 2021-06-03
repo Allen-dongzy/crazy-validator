@@ -1,7 +1,7 @@
 const validator = require('../dist')
 
 const value1 = 'a@b.com'
-const value2 = '6540011997022129167'
+const value2 = '654001199702212916'
 const value3 = '17623178041'
 
 const checkElements = [{

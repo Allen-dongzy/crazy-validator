@@ -6,7 +6,7 @@ const ruleBack = ({
   res,
   expectType,
   currentType,
-  status
+  errMsg
 }: RuleBack): RulesResponse => {
   if (res) {
     return {
@@ -14,9 +14,10 @@ const ruleBack = ({
     }
   } else {
     return {
-      status: status || statusBox.checkFail,
+      status: statusBox.checkFail,
       expectType,
-      currentType
+      currentType,
+      errMsg
     }
   }
 }

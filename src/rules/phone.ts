@@ -1,4 +1,4 @@
-import { isNumber, isString, getType } from '../tools/validationTypes'
+import { getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
 
@@ -8,15 +8,16 @@ export const phone = (value: Value): RulesResponse => {
   const currentType: string = getType(value)
   return ruleBack({
     res: isPhone(value),
+    errMsg: '手机号格式错误',
     expectType,
     currentType
   })
 }
 
 // 手机号校验-简单结果
-export const isPhone = (value: Value): boolean => {
-  if (isNumber(value)) value = value.toString()
-  if (!isString(value)) return false
+export const isPhone = (value: Value, info?: string, toast?: Function): boolean => {
   const phoneRegExg: RegExp = /^1[34578]\d{9}$/
-  return phoneRegExg.test(value as string)
+  const res = phoneRegExg.test(value as string)
+  if (!res && info && toast) toast(info)
+  return res
 }

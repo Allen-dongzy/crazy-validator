@@ -4,6 +4,5 @@ import { StatusBox } from '../types'
 export const statusBox: StatusBox = {
   checkSuccess: 1000,
   checkFail: 1001,
-  valueErr: 1002,
-  rulesErr: 1003
+  rulesErr: 1002
 }
