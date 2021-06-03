@@ -1,9 +1,9 @@
 const validator = require('../dist').default
 const { isIdentity, limitRange, limitLength } = require('../dist')
 
-const value1: any = 'a@b.com'
-const value2: any = '6540011997022129161'
-const value3: number = 22
+const value1 = 'a@b.com'
+const value2 = '6540011997022129161'
+const value3 = 22
 
 const checkElements = [{
   value: value1,
@@ -24,7 +24,7 @@ const checkElements = [{
   rules: ['required', 'range']
 }]
 
-const test = (str: string) => {
+const test = (str) => {
   console.log(str)
 }
 console.log(validator(checkElements, test))

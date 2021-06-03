@@ -5,7 +5,7 @@ export type Status = 1000 | 1001 | 1002
 export type Value = Array<any> | object | string | number
 
 // 校验规则
-export type Rule = 'required' | 'email' | 'phone' | 'identity' | 'noEmoji' | 'size' | 'length'
+export type Rule = 'required' | 'email' | 'phone' | 'identity' | 'noEmoji' | 'range' | 'length'
 
 // 状态容器
 export interface StatusBox {

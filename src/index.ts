@@ -4,7 +4,7 @@ import { isEmail } from './rules/email'
 import { isPhone } from './rules/phone'
 import { isIdentity } from './rules/identity'
 import { isNoEmoji } from './rules/noEmoji'
-import { limitSize } from './rules/size'
+import { limitRange } from './rules/range'
 import { limitLength } from './rules/length'
 
 // 导出简单验证方法
@@ -14,7 +14,7 @@ export {
   isPhone,
   isIdentity,
   isNoEmoji,
-  limitSize,
+  limitRange,
   limitLength
 }
 

@@ -1,11 +1,10 @@
-const validator = require('../dist').default
-const { isIdentity, limitRange, limitLength } = require('../dist')
+import validator, { CheckElement, isIdentity, limitRange, limitLength } from '../src'
 
 const value1: any = 'a@b.com'
 const value2: any = '6540011997022129161'
 const value3: number = 22
 
-const checkElements = [{
+const checkElements: CheckElement[] = [{
   value: value1,
   rules: ['required', 'email', {
     type: 'length',

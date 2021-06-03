@@ -12,23 +12,23 @@ interface LimitSizeParams {
 // 默认错误提示
 const errMsg: string = '数值大小不在指定范围内'
 
-// 数值大小校验-严谨结果
-export const size = (value: Value, max: number, min: number = 0): RulesResponse => {
+// 数值范围校验-严谨结果
+export const range = (value: Value, max: number, min: number = 0): RulesResponse => {
   let errMsg = `请输入${min}-${max}之间的数值`
   if (!max) errMsg = '缺少最大值属性:max'
   const expectType: string = 'number'
   const currentType: string = getType(value)
   const params: LimitSizeParams = { value, min, max }
   return ruleBack({
-    res: limitSize(params),
+    res: limitRange(params),
     errMsg,
     expectType,
     currentType
   })
 }
 
-// 数值大小校验-简单结果
-export const limitSize = (params: LimitSizeParams, info?: string | Function, toast?: Function): boolean => {
+// 数值范围校验-简单结果
+export const limitRange = (params: LimitSizeParams, info?: string | Function, toast?: Function): boolean => {
   if (isFunction(info)) {
     toast = info as Function
     info = errMsg

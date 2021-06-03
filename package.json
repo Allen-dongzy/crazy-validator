@@ -7,9 +7,10 @@
   "author": "allen_d <allen.dongzy@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node test/index.ts",
-    "test:js": "node test/test.js",
-    "test:ts": "ts-node test/test.ts",
+    "dev": "ts-node examples/index.ts",
+    "test:js": "node test/index.js",
+    "test:ts": "ts-node test/index.ts",
+    "test:html": "ts-node test/test.html",
     "build": "rollup -c",
     "prepare": "husky install"
   },
