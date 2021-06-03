@@ -7,6 +7,7 @@ import { phone } from '../rules/phone'
 import { identity } from '../rules/identity'
 import { noEmoji } from '../rules/noEmoji'
 import { size } from '../rules/size'
+import { length } from '../rules/length'
 
 // 校验规则控制器
 export const validationController = (value: Value, rule: Rule | ComplexRule): RulesResponse => {
@@ -29,7 +30,10 @@ export const validationController = (value: Value, rule: Rule | ComplexRule): Ru
       rulesResponse = noEmoji(value)
       break
     case 'size':
-      rulesResponse = size(value, (rule as ComplexRule).min, (rule as ComplexRule).max)
+      rulesResponse = size(value, (rule as ComplexRule).max, (rule as ComplexRule).min)
+      break
+    case 'length':
+      rulesResponse = length(value, (rule as ComplexRule).max, (rule as ComplexRule).min)
       break
     default:
       rulesResponse = {

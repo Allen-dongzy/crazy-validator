@@ -5,6 +5,7 @@ import { isPhone } from './rules/phone'
 import { isIdentity } from './rules/identity'
 import { isNoEmoji } from './rules/noEmoji'
 import { limitSize } from './rules/size'
+import { limitLength } from './rules/length'
 
 // 导出简单验证方法
 export {
@@ -13,7 +14,8 @@ export {
   isPhone,
   isIdentity,
   isNoEmoji,
-  limitSize
+  limitSize,
+  limitLength
 }
 
 // 导出类型
