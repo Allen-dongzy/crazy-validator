@@ -11,7 +11,7 @@
     "test:js": "node test/index.js",
     "test:ts": "ts-node test/index.ts",
     "build": "rollup -c",
-    "prepare": "husky install"
+    "husky": "husky install"
   },
   "dependencies": {},
   "devDependencies": {
