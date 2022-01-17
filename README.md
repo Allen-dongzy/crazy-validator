@@ -1,7 +1,7 @@
 # <p align="center">crazy-validator </p>
 
 [![build](https://img.shields.io/badge/build-passing-brightgreen)](https://www.npmjs.com/package/crazy-validator)
-[![license](https://img.shields.io/badge/license-MIT-green)](https://www.npmjs.com/package/crazy-validator)
+[![license](https://img.shields.io/badge/license-GPL-yellowgreen)](https://www.npmjs.com/package/crazy-validator)
 [![npm](https://img.shields.io/badge/npm-v6.14.9-blue)](https://www.npmjs.com/package/crazy-validator)
 
 **crazy-validator 是一款帮助前端开发人员进行表单验证的通用型插件**
