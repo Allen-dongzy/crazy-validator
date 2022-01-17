@@ -1,16 +1,16 @@
 import validator, { CheckElement, isIdentity, limitRange, limitLength } from '../src'
 
-const value1: any = 'a@b.com'
+const value1: any = 12345678
 const value2: any = '6540011997022129161'
 const value3: number = 22
 
 const checkElements: CheckElement[] = [{
   value: value1,
-  rules: ['required', 'email', {
+  rules: ['required', {
     type: 'length',
-    min: 9,
-    max: 17,
-    msg: '请输入9-17位的value1'
+    min: 3,
+    max: 7,
+    msg: '请输入3-7位的value1'
   }]
 }, {
   value: value2,

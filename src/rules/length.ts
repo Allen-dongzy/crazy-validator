@@ -1,4 +1,4 @@
-import { isString, isFunction, getType } from '../tools/validationTypes'
+import { isString, isNumber, isFunction, getType } from '../tools/validationTypes'
 import { Value, RulesResponse } from '../types'
 import ruleBack from './ruleBack'
 
@@ -12,7 +12,7 @@ interface LimitLength {
 // 默认错误提示
 const errMsg: string = '字符不在指定范围内'
 
-// 数值大小校验-严谨结果
+// 长度校验-严谨结果
 export const length = (value: Value, max: number, min: number = 0): RulesResponse => {
   let errMsg = `请输入${min}-${max}位字符`
   if (!max) errMsg = '缺少最大值属性:max'
@@ -27,7 +27,7 @@ export const length = (value: Value, max: number, min: number = 0): RulesRespons
   })
 }
 
-// 数值大小校验-简单结果
+// 长度校验-简单结果
 export const limitLength = (params: LimitLength, info?: string | Function, toast?: Function): boolean => {
   if (isFunction(info)) {
     toast = info as Function
@@ -37,10 +37,10 @@ export const limitLength = (params: LimitLength, info?: string | Function, toast
   let res: boolean
   if (!max) {
     res = false
-  } else if (!isString(value)) {
+  } else if (!isString(value) && !isNumber(value)) {
     res = false
   } else {
-    res = !((value as string).length < min || (value as string).length > max)
+    res = !(String(value).length < min || String(value).length > max)
   }
   if (!res && info && toast) toast(info as string)
   return res
