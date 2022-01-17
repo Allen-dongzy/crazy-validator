@@ -1,6 +1,6 @@
 {
   "name": "crazy-validator",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "crazy-validator是一款帮助前端开发人员进行表单验证的通用型插件",
   "main": "src/index.js",
   "repository": "git@github.com:Allen-dongzy/crazy-validator.git",
