@@ -1,5 +1,5 @@
 import statusBox from './tools/validationStatus'
-import validationToast from './tools/validationToast'
+import { validationToast } from './tools/validationToast'
 import { isObject, isArray } from './tools/validationTypes'
 import { validationController } from './tools/validationController'
 import { setValidationResponse, clipValidationResponse } from './tools/validationResponse'

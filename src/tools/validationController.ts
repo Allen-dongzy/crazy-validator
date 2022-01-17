@@ -30,10 +30,10 @@ export const validationController = (value: Value, rule: Rule | ComplexRule): Ru
       rulesResponse = noEmoji(value)
       break
     case 'range':
-      rulesResponse = range(value, (rule as ComplexRule).max, (rule as ComplexRule).min)
+      rulesResponse = range({ value, max: (rule as ComplexRule).max, min: (rule as ComplexRule).min })
       break
     case 'length':
-      rulesResponse = length(value, (rule as ComplexRule).max, (rule as ComplexRule).min)
+      rulesResponse = length({ value, max: (rule as ComplexRule).max, min: (rule as ComplexRule).min })
       break
     default:
       rulesResponse = {

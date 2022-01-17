@@ -1,26 +1,20 @@
+import { ComplexValue, SimpleCheck, ComplexCheck } from '../types'
 import { isString, isNumber, isFunction, getType } from '../tools/validationTypes'
-import { Value, RulesResponse } from '../types'
+import { simpleToast } from '../tools/validationToast'
 import ruleBack from './ruleBack'
 
-// 形参接口
-interface LimitLength {
-  value: Value;
-  max: number;
-  min?: number;
-}
-
 // 默认错误提示
-const errMsg: string = '字符不在指定范围内'
+const errMsg: string = '内容不在指定范围内'
 
 // 长度校验-严谨结果
-export const length = (value: Value, max: number, min: number = 0): RulesResponse => {
+export const length: ComplexCheck = (params) => {
+  const { value, max, min = 0 } = params as ComplexValue
   let errMsg = `请输入${min}-${max}位字符`
   if (!max) errMsg = '缺少最大值属性:max'
   const expectType: string = 'number'
   const currentType: string = getType(value)
-  const params: LimitLength = { value, min, max }
   return ruleBack({
-    res: limitLength(params),
+    res: limitLength(params, false),
     errMsg,
     expectType,
     currentType
@@ -28,12 +22,12 @@ export const length = (value: Value, max: number, min: number = 0): RulesRespons
 }
 
 // 长度校验-简单结果
-export const limitLength = (params: LimitLength, info?: string | Function, toast?: Function): boolean => {
+export const limitLength: SimpleCheck = (params, info, toast) => {
   if (isFunction(info)) {
     toast = info as Function
     info = errMsg
   }
-  const { value, min, max } = params
+  const { value, max, min = 0 } = params as ComplexValue
   let res: boolean
   if (!max) {
     res = false
@@ -42,6 +36,6 @@ export const limitLength = (params: LimitLength, info?: string | Function, toast
   } else {
     res = !(String(value).length < min || String(value).length > max)
   }
-  if (!res && info && toast) toast(info as string)
+  if (!res) simpleToast(info, errMsg, toast)
   return res
 }

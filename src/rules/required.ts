@@ -1,16 +1,17 @@
+import { SimpleCheck, ComplexCheck } from '../types'
 import { isObject, isArray, isFunction, getType } from '../tools/validationTypes'
-import { Value, RulesResponse } from '../types'
+import { simpleToast } from '../tools/validationToast'
 import ruleBack from './ruleBack'
 
 // 默认错误提示
 const errMsg: string = '必填项不能为空'
 
 // 非空校验-严谨结果
-export const required = (value: Value): RulesResponse => {
+export const required: ComplexCheck = (value) => {
   const expectType: string = 'any'
   const currentType: string = getType(value)
   return ruleBack({
-    res: isRequired(value),
+    res: isRequired(value, false),
     errMsg,
     expectType,
     currentType
@@ -18,7 +19,7 @@ export const required = (value: Value): RulesResponse => {
 }
 
 // 非空校验-简单结果
-export const isRequired = (value: Value, info?: string | Function, toast?: Function): boolean => {
+export const isRequired: SimpleCheck = (value, info, toast) => {
   if (isFunction(info)) {
     toast = info as Function
     info = errMsg
@@ -31,6 +32,6 @@ export const isRequired = (value: Value, info?: string | Function, toast?: Funct
   } else {
     res = !!value
   }
-  if (!res && info && toast) toast(info as string)
+  if (!res) simpleToast(info, errMsg, toast)
   return res
 }

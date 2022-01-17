@@ -1,11 +1,35 @@
 // 状态码 校验成功 | 校验失败 | rules参数错误
 export type Status = 1000 | 1001 | 1002
 
-// 校验值
-export type Value = Array<any> | object | string | number
+// 设置toast的提示函数
+export type ToastFn = (msg: string) => void
 
 // 校验规则
 export type Rule = 'required' | 'email' | 'phone' | 'identity' | 'noEmoji' | 'range' | 'length'
+
+// 校验值
+export type Value = Array<any> | object | string | number
+
+// 复杂校验值
+export type ComplexValue = {
+  value: Value;
+  max: number;
+  min?: number;
+}
+
+// rule响应接口
+export interface RulesResponse {
+  status: Status;
+  expectType?: string;
+  currentType?: string;
+  errMsg?: string;
+}
+
+// 简单规则校验函数
+export type SimpleCheck = (value: Value | ComplexValue, info?: boolean | string | Function, toast?: Function) => boolean
+
+// 复杂规则校验函数
+export type ComplexCheck = (value: Value | ComplexValue) => RulesResponse
 
 // 状态容器
 export interface StatusBox {
@@ -30,14 +54,6 @@ export interface CheckElement {
 // rule返回格式
 export interface RuleBack {
   res: boolean;
-  expectType?: string;
-  currentType?: string;
-  errMsg?: string;
-}
-
-// rule响应接口
-export interface RulesResponse {
-  status: Status;
   expectType?: string;
   currentType?: string;
   errMsg?: string;

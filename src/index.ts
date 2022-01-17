@@ -6,6 +6,7 @@ import { isIdentity } from './rules/identity'
 import { isNoEmoji } from './rules/noEmoji'
 import { limitRange } from './rules/range'
 import { limitLength } from './rules/length'
+import { setToast } from './tools/validationToast'
 
 // 导出简单验证方法
 export {
@@ -16,6 +17,11 @@ export {
   isNoEmoji,
   limitRange,
   limitLength
+}
+
+// 导出设置提示方法
+export {
+  setToast
 }
 
 // 导出类型
