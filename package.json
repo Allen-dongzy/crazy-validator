@@ -3,9 +3,12 @@
   "version": "1.0.3",
   "description": "crazy-validator是一款帮助前端开发人员进行表单验证的通用型插件",
   "main": "src/index.js",
-  "repository": "git@github.com:Allen-dongzy/crazy-validator.git",
   "author": "allen_d <allen.dongzy@gmail.com>",
-  "license": "MIT",
+  "license": "GPL",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Allen-dongzy/crazy-validator.git"
+  },
   "scripts": {
     "dev": "ts-node examples/index.ts",
     "test:js": "node test/index.js",
